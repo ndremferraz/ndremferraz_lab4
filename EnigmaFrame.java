@@ -9,6 +9,7 @@ import javax.swing.border.Border;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 public class EnigmaFrame extends JFrame {
@@ -41,7 +42,7 @@ public class EnigmaFrame extends JFrame {
         this.setLayout(new GridLayout(3, 1, 25, 25));
         inputSection.setLayout(new GridLayout(1, 2));
         outputSection.setLayout(new GridLayout(1, 2));
-        selectionSection.setLayout(new GridLayout(1, 10, 10, 5));
+        selectionSection.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 25));
 
         selectionSection.add(innerSelectLabel);
         selectionSection.add(innerChooser);
@@ -50,6 +51,7 @@ public class EnigmaFrame extends JFrame {
         selectionSection.add(outerSelectLabel);
         selectionSection.add(outerChooser);
         selectionSection.add(startingCharlabel);
+        startingChars.setColumns(20);
         selectionSection.add(startingChars);
         selectionSection.add(encrypt);
         selectionSection.add(decrypt);
