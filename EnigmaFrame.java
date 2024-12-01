@@ -8,12 +8,16 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class EnigmaFrame extends JFrame {
 
+    // creating all the component needed
     String[] comboPatterns = { "1", "2", "3", "4", "5" };
     private JComboBox innerChooser = new JComboBox<String>(comboPatterns);
     private JComboBox middleChooser = new JComboBox<String>(comboPatterns);
@@ -25,6 +29,8 @@ public class EnigmaFrame extends JFrame {
 
     private JButton encrypt = new JButton("Encrypt");
     private JButton decrypt = new JButton("Decrypt");
+    Color nonPressedColor = encrypt.getBackground();
+    Color pressedColor = nonPressedColor.darker();
 
     private JPanel inputSection = new JPanel();
     private JPanel outputSection = new JPanel();
@@ -37,13 +43,39 @@ public class EnigmaFrame extends JFrame {
     private JLabel inputText = new JLabel("Input");
     private JLabel outputText = new JLabel("Output");
 
+    // instantiating all the needed components
     public EnigmaFrame() {
         super();
+
+        // Sets one main layout and 3 subdivisions for each one of the sections
         this.setLayout(new GridLayout(3, 1, 25, 25));
         inputSection.setLayout(new GridLayout(1, 2));
         outputSection.setLayout(new GridLayout(1, 2));
         selectionSection.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 25));
 
+        // Adds Action Listeners to the Encryption Buttons
+        encrypt.addActionListener((e) -> {
+            if (!(encrypt.isSelected())) {
+                encrypt.setSelected(true);
+                encrypt.setBackground(pressedColor);
+                encrypt.setOpaque(true);
+                decrypt.setSelected(false);
+                decrypt.setBackground(nonPressedColor);
+                decrypt.setOpaque(true);
+            }
+        });
+        decrypt.addActionListener((e) -> {
+            if (!(decrypt.isSelected())) {
+                decrypt.setSelected(true);
+                decrypt.setBackground(pressedColor);
+                decrypt.setOpaque(true);
+                encrypt.setSelected(false);
+                encrypt.setBackground(nonPressedColor);
+                encrypt.setOpaque(true);
+            }
+        });
+
+        // Adds all the components in the selection section
         selectionSection.add(innerSelectLabel);
         selectionSection.add(innerChooser);
         selectionSection.add(middleSelectLabel);
@@ -56,18 +88,20 @@ public class EnigmaFrame extends JFrame {
         selectionSection.add(encrypt);
         selectionSection.add(decrypt);
 
+        // Adds all the components in the Input Section
         inputSection.add(inputText);
         inputSection.add(intputTextField);
         intputTextField.setPreferredSize(new Dimension(200, 30));
 
+        // Adds all the components in the Output Section
         outputSection.add(outputText);
         outputSection.add(outputTextArea);
         outputTextArea.setPreferredSize(new Dimension(200, 30));
 
+        // Adds the layouts together and pack them
         this.add(selectionSection);
         this.add(inputSection);
         this.add(outputSection);
-
         this.pack();
     }
 
