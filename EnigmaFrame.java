@@ -17,6 +17,9 @@ import java.awt.event.ActionListener;
 
 public class EnigmaFrame extends JFrame {
 
+    private Boolean encryptOrDecrypt;
+    private String startingCharString;
+
     // creating all the component needed
     String[] comboPatterns = { "1", "2", "3", "4", "5" };
     private JComboBox innerChooser = new JComboBox<String>(comboPatterns);
@@ -56,6 +59,7 @@ public class EnigmaFrame extends JFrame {
         // Adds Action Listeners to the Encryption Buttons
         encrypt.addActionListener((e) -> {
             if (!(encrypt.isSelected())) {
+                encryptOrDecrypt = true;
                 encrypt.setSelected(true);
                 encrypt.setBackground(pressedColor);
                 encrypt.setOpaque(true);
@@ -66,6 +70,7 @@ public class EnigmaFrame extends JFrame {
         });
         decrypt.addActionListener((e) -> {
             if (!(decrypt.isSelected())) {
+                encryptOrDecrypt = false;
                 decrypt.setSelected(true);
                 decrypt.setBackground(pressedColor);
                 decrypt.setOpaque(true);
@@ -73,6 +78,12 @@ public class EnigmaFrame extends JFrame {
                 encrypt.setBackground(nonPressedColor);
                 encrypt.setOpaque(true);
             }
+        });
+
+        // Adds ActionListener to startingChars
+        startingChars.addActionListener((e) -> {
+            startingCharString = startingChars.getText();
+            // System.out.println(startingCharString);
         });
 
         // Adds all the components in the selection section
@@ -103,6 +114,15 @@ public class EnigmaFrame extends JFrame {
         this.add(inputSection);
         this.add(outputSection);
         this.pack();
+    }
+
+    // Helper Methods
+    public Boolean encryptOrNot() {
+        return encryptOrDecrypt;
+    }
+
+    public String getStartingChars() {
+        return startingCharString;
     }
 
 }
