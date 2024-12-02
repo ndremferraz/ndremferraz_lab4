@@ -5,18 +5,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class EnigmaFrame extends JFrame {
 
+    // private fields that will be passed on to the UI file
     private Boolean encryptOrDecrypt;
     private String startingCharString;
     private String message;
@@ -148,15 +144,24 @@ public class EnigmaFrame extends JFrame {
 
     // Helper Methods
     public Boolean encryptOrNot() {
-        return encryptOrDecrypt;
+        if (encryptOrDecrypt != null) {
+            return encryptOrDecrypt;
+        }
+        return true;
     }
 
     public String getStartingChars() {
-        return startingCharString;
+        if (startingCharString != null) {
+            return startingCharString;
+        }
+        return "AAA";
     }
 
     public String getMessage() {
-        return message;
+        if (message != null) {
+            return message;
+        }
+        return "HELLO#WORLD";
     }
 
     public void setMessage(String message) {
@@ -164,16 +169,28 @@ public class EnigmaFrame extends JFrame {
         outputTextArea.setText(message);
     }
 
-    public String getInner() {
-        return innerRotor;
+    public int getInner() {
+        try {
+            return Integer.parseInt(innerRotor);
+        } catch (NumberFormatException e) {
+            return 1;
+        }
     }
 
-    public String getOuter() {
-        return outerRotor;
+    public int getOuter() {
+        try {
+            return Integer.parseInt(outerRotor);
+        } catch (NumberFormatException e) {
+            return 1;
+        }
     }
 
-    public String getMiddle() {
-        return middleRotor;
+    public int getMiddle() {
+        try {
+            return Integer.parseInt(middleRotor);
+        } catch (NumberFormatException e) {
+            return 1;
+        }
     }
 
 }
