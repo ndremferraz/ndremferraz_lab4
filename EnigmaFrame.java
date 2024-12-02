@@ -19,6 +19,7 @@ public class EnigmaFrame extends JFrame {
 
     private Boolean encryptOrDecrypt;
     private String startingCharString;
+    private String message;
 
     // creating all the component needed
     String[] comboPatterns = { "1", "2", "3", "4", "5" };
@@ -32,8 +33,8 @@ public class EnigmaFrame extends JFrame {
 
     private JButton encrypt = new JButton("Encrypt");
     private JButton decrypt = new JButton("Decrypt");
-    Color nonPressedColor = encrypt.getBackground();
-    Color pressedColor = nonPressedColor.darker();
+    private Color nonPressedColor = encrypt.getBackground();
+    private Color pressedColor = nonPressedColor.darker();
 
     private JPanel inputSection = new JPanel();
     private JPanel outputSection = new JPanel();
@@ -86,6 +87,14 @@ public class EnigmaFrame extends JFrame {
             // System.out.println(startingCharString);
         });
 
+        // Prevents outputTextArea from being edited
+        outputTextArea.setEditable(false);
+
+        // Adds ActionListener to inputTextField
+        intputTextField.addActionListener((e) -> {
+            message = intputTextField.getText();
+        });
+
         // Adds all the components in the selection section
         selectionSection.add(innerSelectLabel);
         selectionSection.add(innerChooser);
@@ -123,6 +132,15 @@ public class EnigmaFrame extends JFrame {
 
     public String getStartingChars() {
         return startingCharString;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        outputTextArea.setText(message);
+        outputTextArea.setCaretPosition(outputTextArea.getDocument().getLength());
     }
 
 }

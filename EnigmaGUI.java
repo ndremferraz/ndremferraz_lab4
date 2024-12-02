@@ -9,6 +9,18 @@ public class EnigmaGUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
+        String message;
+
+        while (true) {
+            message = frame.getMessage();
+            try {
+                Thread.sleep(50);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            frame.setMessage(message);
+        }
+
     }
 
 }
