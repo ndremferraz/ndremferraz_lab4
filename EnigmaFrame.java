@@ -20,6 +20,9 @@ public class EnigmaFrame extends JFrame {
     private Boolean encryptOrDecrypt;
     private String startingCharString;
     private String message;
+    private String innerRotor;
+    private String middleRotor;
+    private String outerRotor;
 
     // creating all the component needed
     String[] comboPatterns = { "1", "2", "3", "4", "5" };
@@ -56,6 +59,24 @@ public class EnigmaFrame extends JFrame {
         inputSection.setLayout(new GridLayout(1, 2));
         outputSection.setLayout(new GridLayout(1, 2));
         selectionSection.setLayout(new FlowLayout(FlowLayout.LEFT, 30, 25));
+
+        // Adds Action Listener to innerChooser
+        innerChooser.addActionListener((e) -> {
+            innerRotor = (String) innerChooser.getSelectedItem();
+            // System.out.println(innerRotor);
+        });
+
+        // Adds Action Listener to middleChooser
+        middleChooser.addActionListener((e) -> {
+            middleRotor = (String) middleChooser.getSelectedItem();
+            // System.out.println(middleRotor);
+        });
+
+        // Adds Action Listener to innerChooser
+        outerChooser.addActionListener((e) -> {
+            outerRotor = (String) outerChooser.getSelectedItem();
+            // System.out.println(outerRotor);
+        });
 
         // Adds Action Listeners to the Encryption Buttons
         encrypt.addActionListener((e) -> {
@@ -139,8 +160,20 @@ public class EnigmaFrame extends JFrame {
     }
 
     public void setMessage(String message) {
+        // outputTextArea.setText("HELLOOOO");
         outputTextArea.setText(message);
-        outputTextArea.setCaretPosition(outputTextArea.getDocument().getLength());
+    }
+
+    public String getInner() {
+        return innerRotor;
+    }
+
+    public String getOuter() {
+        return outerRotor;
+    }
+
+    public String getMiddle() {
+        return middleRotor;
     }
 
 }
