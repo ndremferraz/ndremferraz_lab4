@@ -26,14 +26,17 @@ public class EnigmaGUI {
                     outputMessage = enigma.decrypt(message);
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
-                outputMessage = "Error, make sure that your starting characters and input text are valid";
+                outputMessage = "Error, make sure that your input text is valid";
+            } catch (Throwable e) {
+                outputMessage = "Error, make sure that your starting sequence is valid";
             }
+            frame.setMessage(outputMessage);
+
             try {
-                Thread.sleep(50);
+                Thread.sleep(200);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            frame.setMessage(outputMessage);
         }
 
     }

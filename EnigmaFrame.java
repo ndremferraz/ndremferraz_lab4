@@ -150,10 +150,27 @@ public class EnigmaFrame extends JFrame {
         return true;
     }
 
-    public String getStartingChars() {
+    public String getStartingChars() throws Throwable {
+        // This would have been much simpler if I Could edit the Rotor class and make
+        // sure it throws an Exception if the value of the starting character is not
+        // acceptable
+        String rotors[] = { "#GNUAHOVBIPWCJQXDKRYELSZFMT", "#EJOTYCHMRWAFKPUZDINSXBGLQV",
+                "#BDFHJLNPRTVXZACEGIKMOQSUWY", "#NWDKHGXZVRIFJBLMAOPSCYUTQE", "#TGOWHLIFMCSZYRVXQABUPEJKND" };
+
+        // this checks whether or not the characters in the starting sequence are
+        // contained in the rotors
+        for (String rotor : rotors) {
+            for (int i = 0; i < 3; i++) {
+                if (rotor.indexOf(startingCharString.substring(i, i + 1)) < 0) {
+                    throw new Throwable();
+                }
+            }
+        }
+
         if (startingCharString != null) {
             return startingCharString;
         }
+
         return "AAA";
     }
 
